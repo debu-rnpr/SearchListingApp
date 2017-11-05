@@ -1,12 +1,13 @@
 package app.searchlistingapp.com.data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by debu on 5/11/17.
  */
 
-public class SearchDataModel{
+public class SearchDataModel implements Serializable{
     private List<Hits> hits;
 
     private String page;
