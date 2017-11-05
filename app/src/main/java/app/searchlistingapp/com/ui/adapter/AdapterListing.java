@@ -54,7 +54,6 @@ public class AdapterListing extends RecyclerView.Adapter<AdapterListing.ListHold
             this.dataBinding = dataBinding;
         }
 
-
         public ViewDataBinding getDataBinding() {
             return dataBinding;
         }

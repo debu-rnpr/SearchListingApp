@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -18,7 +20,7 @@ import app.searchlistingapp.com.presenter.PresenterMain;
 import app.searchlistingapp.com.ui.adapter.AdapterListing;
 import app.searchlistingapp.com.ui.view.MainMVPview;
 
-public class MainActivity extends AppCompatActivity implements MainMVPview{
+public class MainActivity extends AppCompatActivity implements MainMVPview,SearchView.OnQueryTextListener{
 
     @Inject
     @ActivityContext
@@ -46,6 +48,14 @@ public class MainActivity extends AppCompatActivity implements MainMVPview{
         }else{
             presenterMain.initilize("india");
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search,menu);
+        SearchView searchView = (SearchView)menu.findItem(R.id.action_search).getActionView();
+        searchView.setOnQueryTextListener(this);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -87,5 +97,16 @@ public class MainActivity extends AppCompatActivity implements MainMVPview{
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.listing);
         recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapterListing);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        presenterMain.initilize(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

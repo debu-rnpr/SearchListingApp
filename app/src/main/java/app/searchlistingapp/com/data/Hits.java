@@ -1,12 +1,17 @@
 package app.searchlistingapp.com.data;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.view.View;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by debu on 5/11/17.
  */
 
-public class Hits {
+public class Hits implements Serializable{
     private String comment_text;
 
     private String story_text;
@@ -173,6 +178,11 @@ public class Hits {
     public void setParent_id (String parent_id)
     {
         this.parent_id = parent_id;
+    }
+
+    public void showInBrowser(View v){
+        Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse(url.length()>0 ? url : story_url));
+        v.getContext().startActivity(intent);
     }
 
 }
